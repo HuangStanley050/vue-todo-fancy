@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" absolute temporary class="info">
       <v-list-item>
         <v-list-item-avatar>
           <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
@@ -14,13 +14,15 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item v-for="item in navItems" :key="item.title" link>
+        <v-list-item v-for="item in navItems" :key="item.title" :to="item.link">
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon color="white">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="white--text">{{
+              item.title
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -35,14 +37,14 @@
         <div class="flex-grow-1"></div>
 
         <div class="d-none d-sm-flex d-lg-flex d-xl-flex d-md-flex">
-          <v-btn text>
-            Login
-            <v-icon right>mdi-account</v-icon>
-          </v-btn>
-
-          <v-btn text>
-            Logout
-            <v-icon right>mdi-exit-to-app</v-icon>
+          <v-btn
+            :to="item.link"
+            text
+            v-for="item in navItems"
+            :key="item.title"
+          >
+            {{ item.title }}
+            <v-icon right>{{ item.icon }}</v-icon>
           </v-btn>
         </div>
       </v-app-bar>
@@ -63,6 +65,7 @@ export default {
       let loginItems = [
         { icon: "mdi-steam", title: "Dashboard", link: "/dashboard" },
         { icon: "mdi-pen", title: "Create Todo", link: "/createTodo" },
+        { icon: "mdi-account-multiple", title: "Team", link: "/team" },
         { icon: "mdi-exit-to-app", title: "Logout" }
       ];
       if (!this.userIsAuthenticated) {
