@@ -1,23 +1,81 @@
 <template>
   <div>
-    <v-app-bar app color="blue darken-2" dark>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+        </v-list-item-avatar>
 
-      <v-toolbar-title>Page title</v-toolbar-title>
+        <v-list-item-content>
+          <v-list-item-title>John Leider</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-      <div class="flex-grow-1"></div>
+      <v-divider></v-divider>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+      <v-list dense>
+        <v-list-item v-for="item in navItems" :key="item.title" link>
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-app-bar>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <div>
+      <v-app-bar app color="blue darken-2" dark>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>Fancy Todos</v-toolbar-title>
+
+        <div class="flex-grow-1"></div>
+
+        <div class="d-none d-sm-flex d-lg-flex d-xl-flex d-md-flex">
+          <v-btn text>
+            Login
+            <v-icon right>mdi-account</v-icon>
+          </v-btn>
+
+          <v-btn text>
+            Logout
+            <v-icon right>mdi-exit-to-app</v-icon>
+          </v-btn>
+        </div>
+      </v-app-bar>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    userIsAuthenticated() {
+      return true;
+    },
+    navItems() {
+      let logoutItem = [
+        { icon: "mdi-account", title: "Login", link: "/login" }
+      ];
+      let loginItems = [
+        { icon: "mdi-steam", title: "Dashboard", link: "/dashboard" },
+        { icon: "mdi-pen", title: "Create Todo", link: "/createTodo" },
+        { icon: "mdi-exit-to-app", title: "Logout" }
+      ];
+      if (!this.userIsAuthenticated) {
+        return logoutItem;
+      } else {
+        return loginItems;
+      }
+    }
+  },
+  data() {
+    return {
+      drawer: false
+    };
+  }
+};
 </script>
