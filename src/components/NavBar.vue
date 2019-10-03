@@ -63,7 +63,7 @@ export default {
         { icon: "mdi-account", title: "Login", link: "/login" }
       ];
       let loginItems = [
-        { icon: "mdi-steam", title: "Dashboard", link: "/dashboard" },
+        { icon: "mdi-steam", title: "Dashboard", link: "/" },
         { icon: "mdi-pen", title: "Create Todo", link: "/createTodo" },
         { icon: "mdi-account-multiple", title: "Team", link: "/team" },
         { icon: "mdi-exit-to-app", title: "Logout" }
