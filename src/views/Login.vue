@@ -66,15 +66,18 @@
 </template>
 <script>
 export default {
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/");
+      }
+    }
+  },
   methods: {
     onDismissed() {
       //this.$store.dispatch("clearError");
     },
     onSignin() {
-      // this.$store.dispatch("signUserin", {
-      //   email: this.email,
-      //   password: this.password
-      // });
       this.$store.dispatch("loginUser", {
         email: this.email,
         password: this.password
@@ -89,7 +92,7 @@ export default {
       //return this.$store.getters.error;
     },
     user() {
-      //return this.$store.getters.user;
+      return this.$store.getters.user;
     }
   },
   data() {

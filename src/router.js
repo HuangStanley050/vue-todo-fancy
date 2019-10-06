@@ -4,6 +4,7 @@ import DashBoard from "./views/DashBoard.vue";
 import Login from "./views/Login.vue";
 import CreateTodo from "./views/CreateTodo.vue";
 import Team from "./views/Team.vue";
+import PrivateRoute from "./privateRoutes";
 
 Vue.use(Router);
 
@@ -14,17 +15,20 @@ export default new Router({
     {
       path: "/",
       name: "dashboard",
-      component: DashBoard
+      component: DashBoard,
+      beforeEnter: PrivateRoute
     },
     {
       path: "/createTodo",
       name: "createTodo",
-      component: CreateTodo
+      component: CreateTodo,
+      beforeEnter: PrivateRoute
     },
     {
       path: "/team",
       name: "team",
-      component: Team
+      component: Team,
+      beforeEnter: PrivateRoute
     },
     {
       path: "/login",
