@@ -56,7 +56,10 @@
 export default {
   computed: {
     userIsAuthenticated() {
-      return true;
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      );
     },
     navItems() {
       let logoutItem = [
