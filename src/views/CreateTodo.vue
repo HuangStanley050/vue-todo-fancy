@@ -2,10 +2,15 @@
   <div>
     <h1 class="grey--text">Createtodo</h1>
     <v-container class="my-5">
-      content
+      <CreateTodo> </CreateTodo>
     </v-container>
   </div>
 </template>
 <script>
-export default {};
+import CreateTodo from "../components/CreateTodo.vue";
+export default {
+  components: {
+    CreateTodo
+  }
+};
 </script>
