@@ -5,5 +5,9 @@ export default {
   },
   mutations: {},
   getters: {},
-  actions: {}
+  actions: {
+    saveTodo: async ({ commit }, payload) => {
+      console.log(payload);
+    }
+  }
 };

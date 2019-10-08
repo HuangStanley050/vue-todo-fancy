@@ -39,7 +39,7 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       v-model="date"
-                      label="Picker in menu"
+                      label="Due Date*"
                       readonly
                       v-on="on"
                     ></v-text-field>
@@ -64,7 +64,7 @@
           <v-btn color="blue darken-1" text @click="dialog = false"
             >Close</v-btn
           >
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="onSubmitTodo">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -72,6 +72,21 @@
 </template>
 <script>
 export default {
+  methods: {
+    onSubmitTodo() {
+      this.dialog = false;
+      if (!this.title || !this.date || !this.information) {
+        alert("form can't be empty");
+        return;
+      }
+      //send action and save the todo in database
+      this.$store.dispatch("saveTodo", {
+        title: this.title,
+        information: this.information,
+        date: this.date
+      });
+    }
+  },
   data() {
     return {
       dialog: false,
