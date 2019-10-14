@@ -22,6 +22,7 @@ export default {
           email: payload.email,
           password: payload.password
         });
+
         let userData = loginResult.data.data;
         commit("setUser", userData);
       } catch (err) {

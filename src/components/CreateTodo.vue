@@ -85,6 +85,9 @@ export default {
         information: this.information,
         date: this.date
       });
+      (this.title = ""),
+        (this.information = ""),
+        (this.date = new Date().toISOString().substr(0, 10));
     }
   },
   data() {
