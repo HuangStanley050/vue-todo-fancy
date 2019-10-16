@@ -6,9 +6,38 @@ export default {
     userTodos: null,
     teamTodos: null
   },
-  mutations: {},
-  getters: {},
+  mutations: {
+    setTeamTodos: (state, payload) => {
+      state.teamTodos = payload;
+    }
+  },
+  getters: {
+    teamTodos(state) {
+      return state.teamTodos;
+    }
+  },
   actions: {
+    fetchTodos: async ({ commit, getters }) => {
+      const token = getters.user.token;
+      try {
+        let result = await axios({
+          headers: { Authorization: `bearer ${token}` },
+          method: "get",
+          url: API.fetchTodos
+        });
+        let tasks = result.data.tasks;
+        let teamTodos = tasks.map(task => ({
+          creator: task.creator,
+          title: task.title,
+          information: task.information,
+          dueDate: task.dueDate,
+          completed: task.completed
+        }));
+        commit("setTeamTodos", teamTodos);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     saveTodo: async ({ commit, getters }, payload) => {
       const token = getters.user.token;
       //const wrongToken = "adsfsa";

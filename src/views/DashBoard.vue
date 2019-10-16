@@ -8,5 +8,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    if (!this.$store.getters.teamTodos) {
+      this.$store.dispatch("fetchTodos");
+    }
+
+    return;
+  }
+};
 </script>
