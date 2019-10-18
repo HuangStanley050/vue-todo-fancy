@@ -9,9 +9,18 @@ export default {
   mutations: {
     setTeamTodos: (state, payload) => {
       state.teamTodos = payload;
+    },
+    setOwnTodos: (state, payload) => {
+      let creator = payload;
+
+      let ownTodos = state.teamTodos.filter(todo => todo.creator === creator);
+      state.userTodos = ownTodos;
     }
   },
   getters: {
+    ownTodos(state) {
+      return state.userTodos;
+    },
     teamTodos(state) {
       return state.teamTodos;
     }
@@ -19,6 +28,7 @@ export default {
   actions: {
     fetchTodos: async ({ commit, getters }) => {
       const token = getters.user.token;
+      const creator = getters.user.email;
       try {
         let result = await axios({
           headers: { Authorization: `bearer ${token}` },
@@ -34,6 +44,7 @@ export default {
           completed: task.completed
         }));
         commit("setTeamTodos", teamTodos);
+        commit("setOwnTodos", creator);
       } catch (err) {
         console.log(err);
       }
@@ -55,7 +66,7 @@ export default {
           url: API.createTodo,
           data: submitData
         });
-        console.log(result.data);
+        //console.log(result.data);
       } catch (err) {
         console.log(err);
       }
