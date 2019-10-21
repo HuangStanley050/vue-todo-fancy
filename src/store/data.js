@@ -13,6 +13,7 @@ export default {
     },
     addTodos: (state, payload) => {
       state.teamTodos.push(payload);
+      state.userTodos.push(payload);
     },
     setTeamTodos: (state, payload) => {
       state.teamTodos = payload;
