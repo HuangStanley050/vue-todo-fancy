@@ -48,6 +48,12 @@ export default {
     todos() {
       return this.$store.getters.teamTodos;
     }
+    // userIsAuthenticated() {
+    //   return (
+    //     this.$store.getters.user !== null &&
+    //     this.$store.getters.user !== undefined
+    //   );
+    // }
   },
   mounted() {
     if (!this.$store.getters.teamTodos) {

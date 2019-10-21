@@ -46,6 +46,12 @@
             {{ item.title }}
             <v-icon right>{{ item.icon }}</v-icon>
           </v-btn>
+          <v-btn v-if="userIsAuthenticated" @click="logout">
+            Logout
+            <v-icon right>
+              mdi-exit-to-app
+            </v-icon>
+          </v-btn>
         </div>
       </v-app-bar>
     </div>
@@ -54,6 +60,11 @@
 
 <script>
 export default {
+  methods: {
+    logout() {
+      this.$store.dispatch("logoutUser");
+    }
+  },
   computed: {
     userIsAuthenticated() {
       return (
@@ -68,8 +79,8 @@ export default {
       let loginItems = [
         { icon: "mdi-steam", title: "Dashboard", link: "/" },
         { icon: "mdi-pen", title: "Create Todo", link: "/createTodo" },
-        { icon: "mdi-account-multiple", title: "Team", link: "/team" },
-        { icon: "mdi-exit-to-app", title: "Logout" }
+        { icon: "mdi-account-multiple", title: "Team", link: "/team" }
+        //{ icon: "mdi-exit-to-app", title: "Logout" }
       ];
       if (!this.userIsAuthenticated) {
         return logoutItem;

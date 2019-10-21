@@ -7,6 +7,13 @@ export default {
     teamTodos: null
   },
   mutations: {
+    clearData: state => {
+      state.userTodos = null;
+      state.teamTodos = null;
+    },
+    addTodos: (state, payload) => {
+      state.teamTodos.push(payload);
+    },
     setTeamTodos: (state, payload) => {
       state.teamTodos = payload;
     },
@@ -66,7 +73,8 @@ export default {
           url: API.createTodo,
           data: submitData
         });
-        //console.log(result.data);
+        const saveTodo = { ...submitData, completed: false };
+        commit("addTodos", saveTodo);
       } catch (err) {
         console.log(err);
       }
