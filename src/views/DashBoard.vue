@@ -56,11 +56,7 @@ export default {
     // }
   },
   mounted() {
-    if (!this.$store.getters.teamTodos) {
-      this.$store.dispatch("fetchTodos");
-    }
-
-    return;
+    this.$store.dispatch("fetchTodos");
   }
 };
 </script>

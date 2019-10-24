@@ -12,7 +12,7 @@ export default {
       state.teamTodos = null;
     },
     addTodos: (state, payload) => {
-      state.teamTodos.push(payload);
+      //state.teamTodos.push(payload);
       state.userTodos.push(payload);
     },
     setTeamTodos: (state, payload) => {
