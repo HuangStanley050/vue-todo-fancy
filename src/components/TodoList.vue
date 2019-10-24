@@ -32,6 +32,25 @@
             {{ todo.completed }}
           </p>
         </v-card-text>
+        <v-card-actions>
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on" class="mx-2" fab dark small color="primary">
+                <v-icon dark>mdi-minus</v-icon>
+              </v-btn>
+            </template>
+            <span>Delete Task</span>
+          </v-tooltip>
+
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on" class="mx-2" fab dark small color="cyan">
+                <v-icon dark>mdi-pencil</v-icon>
+              </v-btn>
+            </template>
+            <span>task Done</span>
+          </v-tooltip>
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>

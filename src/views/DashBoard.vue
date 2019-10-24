@@ -35,6 +35,10 @@
                 {{ todo.completed }}
               </p>
             </v-card-text>
+            <v-card-actions>
+              <v-btn text>Delete Task</v-btn>
+              <v-btn text>Mark Complete</v-btn>
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
