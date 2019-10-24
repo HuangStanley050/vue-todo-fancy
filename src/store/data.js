@@ -34,6 +34,19 @@ export default {
     }
   },
   actions: {
+    deleteTodo: async ({ commit, getters }, payload) => {
+      const token = getters.user.token;
+      try {
+        let result = await axios({
+          headers: { Authorization: `bearer ${token}` },
+          method: "delete",
+          url: API.deleteTodo + `${payload}`
+        });
+        console.log(result);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     fetchTodos: async ({ commit, getters }) => {
       const token = getters.user.token;
       const creator = getters.user.email;
@@ -45,6 +58,7 @@ export default {
         });
         let tasks = result.data.tasks;
         let teamTodos = tasks.map(task => ({
+          id: task._id,
           creator: task.creator,
           title: task.title,
           information: task.information,
@@ -74,8 +88,27 @@ export default {
           url: API.createTodo,
           data: submitData
         });
-        const saveTodo = { ...submitData, completed: false };
-        commit("addTodos", saveTodo);
+
+        const {
+          _id,
+          title,
+          information,
+          creator,
+          dueDate,
+          completed
+        } = result.data.newTask;
+
+        const newTask = {
+          _id,
+          title,
+          information,
+          creator,
+          dueDate,
+          completed
+        };
+
+        //const saveTodo = { ...submitData, completed: false };
+        commit("addTodos", newTask);
       } catch (err) {
         console.log(err);
       }

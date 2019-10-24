@@ -3,7 +3,7 @@
     <h1 class="grey--text">Dashboard</h1>
     <v-container class="my-5">
       <v-row wrap>
-        <v-col v-for="todo in todos" :key="todo.title" cols="12">
+        <v-col v-for="todo in todos" :key="todo._id" cols="12">
           <v-card class="d-flex" outlined raised>
             <v-card-text>
               <div class="text--primary">Task</div>
@@ -35,10 +35,6 @@
                 {{ todo.completed }}
               </p>
             </v-card-text>
-            <v-card-actions>
-              <v-btn text>Delete Task</v-btn>
-              <v-btn text>Mark Complete</v-btn>
-            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>

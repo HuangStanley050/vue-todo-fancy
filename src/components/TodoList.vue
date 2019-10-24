@@ -1,6 +1,6 @@
 <template>
   <v-row wrap>
-    <v-col v-for="todo in ownTodos" :key="todo.title" cols="12">
+    <v-col v-for="todo in ownTodos" :key="todo._id" cols="12">
       <v-card class="d-flex" outlined raised>
         <v-card-text>
           <div class="text--primary">Task</div>
@@ -35,7 +35,15 @@
         <v-card-actions>
           <v-tooltip top>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" class="mx-2" fab dark small color="primary">
+              <v-btn
+                @click="deleteTodo(todo)"
+                v-on="on"
+                class="mx-2"
+                fab
+                dark
+                small
+                color="primary"
+              >
                 <v-icon dark>mdi-minus</v-icon>
               </v-btn>
             </template>
@@ -57,6 +65,12 @@
 </template>
 <script>
 export default {
+  methods: {
+    deleteTodo(todo) {
+      const id = todo.id;
+      this.$store.dispatch("deleteTodo", id);
+    }
+  },
   computed: {
     ownTodos() {
       return this.$store.getters.ownTodos;
