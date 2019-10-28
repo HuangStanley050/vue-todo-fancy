@@ -7,6 +7,13 @@ export default {
     teamTodos: null
   },
   mutations: {
+    completeTask: (state, payload) => {
+      state.userTodos.forEach(todo => {
+        if (todo.id === payload) {
+          todo.completed = true;
+        }
+      });
+    },
     deleteTask: (state, payload) => {
       state.userTodos = state.userTodos.filter(
         userTodo => userTodo.id !== payload
@@ -39,10 +46,24 @@ export default {
     }
   },
   actions: {
+    completeTask: async ({ commit, getters }, payload) => {
+      //console.log("complete todo: ", payload);
+      const token = getters.user.token;
+      try {
+        await axios({
+          headers: { Authorization: `bearer ${token}` },
+          method: "patch",
+          url: API.completeTodo + `${payload}`
+        });
+        commit("completeTask", payload);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     deleteTodo: async ({ commit, getters }, payload) => {
       const token = getters.user.token;
       try {
-        let result = await axios({
+        await axios({
           headers: { Authorization: `bearer ${token}` },
           method: "delete",
           url: API.deleteTodo + `${payload}`

@@ -52,7 +52,16 @@
 
           <v-tooltip top>
             <template v-slot:activator="{ on }">
-              <v-btn v-on="on" class="mx-2" fab dark small color="cyan">
+              <v-btn
+                @click="completeTodo(todo)"
+                :disabled="todo.completed"
+                v-on="on"
+                class="mx-2"
+                fab
+                dark
+                small
+                color="cyan"
+              >
                 <v-icon dark>mdi-pencil</v-icon>
               </v-btn>
             </template>
@@ -66,6 +75,10 @@
 <script>
 export default {
   methods: {
+    completeTodo(todo) {
+      const id = todo.id;
+      this.$store.dispatch("completeTask", id);
+    },
     deleteTodo(todo) {
       const id = todo.id;
       this.$store.dispatch("deleteTodo", id);
