@@ -7,6 +7,11 @@ export default {
     teamTodos: null
   },
   mutations: {
+    deleteTask: (state, payload) => {
+      state.userTodos = state.userTodos.filter(
+        userTodo => userTodo.id !== payload
+      );
+    },
     clearData: state => {
       state.userTodos = null;
       state.teamTodos = null;
@@ -42,7 +47,7 @@ export default {
           method: "delete",
           url: API.deleteTodo + `${payload}`
         });
-        console.log(result);
+        commit("deleteTask", payload);
       } catch (err) {
         console.log(err);
       }
