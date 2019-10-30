@@ -2,7 +2,33 @@
   <div>
     <h1 class="grey--text">Team</h1>
     <v-container class="my-5">
-      <v-row wrap> </v-row>
+      <v-row wrap>
+        <v-col
+          cols="12"
+          sm="3"
+          v-for="character in characters"
+          :key="character.name"
+        >
+          <v-card max-width="220" class="pa-2 mx-auto" tile outlined>
+            <v-img
+              class="white--text align-end"
+              height="200px"
+              :src="character.img"
+            >
+            </v-img>
+            <v-card-title>Name: {{ character.name }}</v-card-title>
+            <v-card-subtitle class="pb-0 text-center"
+              >Profession</v-card-subtitle
+            >
+
+            <v-card-text class="text--primary text-center">
+              <div>
+                {{ character.position }}
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
