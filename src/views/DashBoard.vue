@@ -30,7 +30,7 @@
               </p>
             </v-card-text>
             <v-card-text>
-              <div class="text--primary">Status</div>
+              <div class="text--primary">Completion Status</div>
               <p class="text--secondar">
                 {{ todo.completed }}
               </p>
