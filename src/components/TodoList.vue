@@ -36,6 +36,23 @@
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <v-btn
+                @click="sendMail(todo)"
+                v-on="on"
+                class="mx-2"
+                fab
+                dark
+                small
+                color="primary"
+              >
+                <v-icon dark>mdi-email</v-icon>
+              </v-btn>
+            </template>
+            <span>Send Reminder</span>
+          </v-tooltip>
+
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-btn
                 @click="deleteTodo(todo)"
                 v-on="on"
                 class="mx-2"
@@ -58,9 +75,9 @@
                 v-on="on"
                 class="mx-2"
                 fab
-                dark
+                light
                 small
-                color="cyan"
+                color="red"
               >
                 <v-icon dark>mdi-pencil</v-icon>
               </v-btn>
@@ -82,6 +99,10 @@ export default {
     deleteTodo(todo) {
       const id = todo.id;
       this.$store.dispatch("deleteTodo", id);
+    },
+    sendMail(todo) {
+      const id = todo.id;
+      this.$store.dispatch("sendEmail", id);
     }
   },
   computed: {

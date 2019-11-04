@@ -46,6 +46,21 @@ export default {
     }
   },
   actions: {
+    sendEmail: async ({ commit, getters }, payload) => {
+      console.log(payload);
+      const token = getters.user.token;
+      try {
+        let result = await axios({
+          headers: { Authorization: `bearer ${token}` },
+          method: "post",
+          url: API.email,
+          data: { id: payload }
+        });
+        console.log(result.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     completeTask: async ({ commit, getters }, payload) => {
       //console.log("complete todo: ", payload);
       const token = getters.user.token;
